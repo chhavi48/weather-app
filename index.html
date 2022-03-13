@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       body{
+           background-image: url("https://ichef.bbci.co.uk/news/400/cpsprodpb/C327/production/_105395994_051996682-1.jpg");
+       background-repeat: no-repeat;
+        background-size: 100vh;
+         background-size: cover;
+        }
+
+      iframe
+      {
+          /* border: 5px solid wheat; */
+          box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+      } 
+      .outer
+      {
+        
+          height: 540px;
+          width: 1400px;
+          border: 5px solid white;
+          box-sizing: border-box;
+    
+      }
+      input
+      {
+          margin-left: 20%;
+          width: 250px;
+      }
+      button
+      {
+         background-color: white;
+         border-radius: 10px;
+         width: 150px;
+         margin-left: 20%;
+         height: 30px;
+      }
+     
+      p{
+          display: flex;
+      }
+      #grid{
+          display: flex;
+          width: max-content;
+          gap:10px;
+          justify-content: center;
+          margin: auto;
+      }
+      #grid>div{
+          gap:10px;
+          margin: auto;
+          background-image: url(https://store-images.s-microsoft.com/image/apps.10595.14397430983184912.cfdf6f70-0a34-4999-b494-936559d822c3.7355576f-baf9-4be3-8b34-27bdc6ac1bd2);
+         background-position: center;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 10px 10px 10px;
+      }
+    </style>
+</head>
+<body>
+    <div class="outer">
+      
+        <h1 style="color: white; text-decoration: underline; margin-left: 30%;">Weather App</h1>
+<input type="text" id="city" placeholder="enter city name"><br><br>
+    <button onclick="getweather()">get weather</button>
+    <div id="container"></div>
+   
+    <!-- <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=mumbai&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://putlocker-is.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://www.embedgooglemap.net"></a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div> -->
+     
+    <div id="grid"></div>
+</div>
+    
+</body>
+</html>
+<script>
+    // document.body.style.backgroundImage = "url('https://ichef.bbci.co.uk/news/400/cpsprodpb/C327/production/_105395994_051996682-1.jpg' no-repeat right top)";
+    // document.body.style.background = "url('https://ichef.bbci.co.uk/news/400/cpsprodpb/C327/production/_105395994_051996682-1.jpg')";
+   
+    
+    let container=document.getElementById("container")
+    async function getweather()
+    {
+    let city=document.getElementById('city').value;
+//    let res= await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a642600f0384a5e34545d35d9502fde2&units=metric`);
+   let res=await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=7&appid=a642600f0384a5e34545d35d9502fde2&units=metric`)
+  let data=await res.json();
+
+ appenddata(data);
+  console.log("data:",data)
+  }
+
+function appenddata(data)
+{ 
+
+    container.innerHTML= null;
+    let name=document.createElement('h3')
+    name.innerText=`City: ${data.city.name}`;
+    name.style.color="white"
+             let sunrise = document.createElement("h3")
+        sunrise.innerText= `🌅 Sunrise➼${data.city.sunrise}`   
+         
+         sunrise.style.color="white"
+         let div1=document.createElement("div")
+        let list1=document.createElement('p')
+        list1.innerText=`1..☁ Temperature_min➼${data.list[0].main.temp_min}`
+        let list11=document.createElement('p')
+        list11.innerText=`1..Temperature_max➼${data.list[0].main.temp_max}`
+        div1.append(list1,list11);
+
+
+        let div2=document.createElement("div")
+        let list2=document.createElement('p')
+        list2.innerText=`2..☁ Temperature_min➼${data.list[1].main.temp_min}`
+        let list22=document.createElement('p')
+        list22.innerText=`2..Temperature_max➼${data.list[1].main.temp_max}`
+        div2.append(list2,list22);
+
+        let div3=document.createElement("div")
+        let list3=document.createElement('p')
+        list3.innerText=`3..☁ Temperature_min➼${data.list[1].main.temp_min}`
+        let list33=document.createElement('p')
+        list33.innerText=`3..Temperature_max➼${data.list[1].main.temp_max}`
+        div3.append(list3,list33);
+
+        let div4=document.createElement("div")
+        let list4=document.createElement('p')
+        list4.innerText=`4..☁ Temperature_min➼${data.list[1].main.temp_min}`
+        let list44=document.createElement('p')
+        list44.innerText=`4..Temperature_max➼${data.list[1].main.temp_max}`
+        div4.append(list4,list44);
+
+        let div5=document.createElement("div")
+        let list5=document.createElement('p')
+        list5.innerText=`5..☁ Temperature_min➼${data.list[1].main.temp_min}`
+        let list55=document.createElement('p')
+        list55.innerText=`5..Temperature_max➼${data.list[1].main.temp_max}`
+        div5.append(list5,list55);
+
+        let div6=document.createElement("div")
+        let list6=document.createElement('p')
+        list6.innerText=`6..☁ Temperature_min➼${data.list[1].main.temp_min}`
+        let list66=document.createElement('p')
+        list66.innerText=`6..Temperature_max➼${data.list[1].main.temp_max}`
+        div6.append(list6,list66);
+
+
+    let iframe =document.createElement('iframe')
+    iframe.src=`https://maps.google.com/maps?q=${data.city.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+    
+    container.append(name,sunrise,iframe);
+     document.querySelector("#grid").append(div1,div2,div3,div4,div5,div5,div6)
+    
+ }
+
+</script>
